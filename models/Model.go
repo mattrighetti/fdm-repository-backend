@@ -21,3 +21,12 @@ func GetUserByID(model *FloodModel, id string) (err error) {
 	}
 	return nil
 }
+
+// GetMissingModels fetches all missing models from database
+func GetMissingModels(missingModels *[]MissingModel) (err error) {
+	if err = config.DB.Find(missingModels).Error; err != nil {
+		return err
+	}
+
+	return nil
+}

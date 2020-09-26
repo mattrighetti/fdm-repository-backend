@@ -12,6 +12,7 @@ import (
 func GetUsers(c *gin.Context) {
 	var floodModel []models.FloodModel
 	err := models.GetAllUsers(&floodModel)
+
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -22,11 +23,24 @@ func GetUsers(c *gin.Context) {
 //GetUserByID ... Get the user by id
 func GetUserByID(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var user models.FloodModel
-	err := models.GetUserByID(&user, id)
+	var model models.FloodModel
+	err := models.GetUserByID(&model, id)
+
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, model)
+	}
+}
+
+// GetMissingModels gets all missing models from database
+func GetMissingModels(c *gin.Context) {
+	var missingModels []models.MissingModel
+	err := models.GetMissingModels(&missingModels)
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, missingModels)
 	}
 }
