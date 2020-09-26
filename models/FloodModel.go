@@ -1,4 +1,4 @@
-package Models
+package models
 
 type FloodModel struct {
 	ID           uint   `json:"id"`

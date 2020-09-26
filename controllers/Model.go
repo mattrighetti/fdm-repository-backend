@@ -1,9 +1,9 @@
-package Controllers
+package controllers
 
 import (
 	"net/http"
 
-	"github.com/MattRighetti/fdm-repository-backend/Models"
+	Models "github.com/MattRighetti/fdm-repository-backend/models"
 
 	"github.com/gin-gonic/gin"
 )

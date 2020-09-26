@@ -1,7 +1,7 @@
-package Routes
+package routes
 
 import (
-	"github.com/MattRighetti/fdm-repository-backend/Controllers"
+	"github.com/MattRighetti/fdm-repository-backend/controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,8 +11,8 @@ func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	grp1 := r.Group("/api")
 	{
-		grp1.GET("models", Controllers.GetUsers)
-		grp1.GET("models/:id", Controllers.GetUserByID)
+		grp1.GET("models", controllers.GetUsers)
+		grp1.GET("models/:id", controllers.GetUserByID)
 	}
 	return r
 }
