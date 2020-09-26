@@ -1,0 +1,11 @@
+{
+    "client": "mysql",
+    "debug": true,
+    "connection": {
+        "port" :"3306",
+        "user" : "root",
+        "password" : "password",
+        "database" : "fdm-repository-db"
+    },
+    "useNullAsDefault": true
+}

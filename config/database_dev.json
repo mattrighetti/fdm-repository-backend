@@ -1,0 +1,8 @@
+{
+    "client": "sqlite3",
+    "debug": false,
+    "connection": {
+        "filename": "./other/db/postRepositoryDatabase.db"
+    },
+    "useNullAsDefault": true
+}
