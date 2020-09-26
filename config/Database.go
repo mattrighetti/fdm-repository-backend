@@ -6,9 +6,10 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// DB gorm Database object
 var DB *gorm.DB
 
-// DBConfig represents db configuration
+// DBConfig is a struct that contains necessary data to connect to a MYSql server instance
 type DBConfig struct {
 	Host     string
 	Port     int
@@ -17,6 +18,7 @@ type DBConfig struct {
 	Password string
 }
 
+// BuildDBConfig returns a pointer to a DBConfig struct
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
 		Host:     "192.168.1.195",
@@ -29,6 +31,8 @@ func BuildDBConfig() *DBConfig {
 	return &dbConfig
 }
 
+// DbURL returns Database URL readable for GORM
+// e.g. root:my-secret-pw@tcp(192.168.1.195:3306)/fdm-repository?charset=utf8&parseTime=True&loc=Local
 func DbURL(dbConfig *DBConfig) string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
 		dbConfig.User,

@@ -3,27 +3,27 @@ package controllers
 import (
 	"net/http"
 
-	Models "github.com/MattRighetti/fdm-repository-backend/models"
+	"github.com/MattRighetti/fdm-repository-backend/models"
 
 	"github.com/gin-gonic/gin"
 )
 
-//GetUsers ... Get all users
+//GetUsers gets all users from database
 func GetUsers(c *gin.Context) {
-	var user []Models.FloodModel
-	err := Models.GetAllUsers(&user)
+	var floodModel []models.FloodModel
+	err := models.GetAllUsers(&floodModel)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, floodModel)
 	}
 }
 
 //GetUserByID ... Get the user by id
 func GetUserByID(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var user Models.FloodModel
-	err := Models.GetUserByID(&user, id)
+	var user models.FloodModel
+	err := models.GetUserByID(&user, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {

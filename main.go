@@ -22,6 +22,6 @@ func main() {
 	defer config.DB.Close()
 	config.DB.AutoMigrate(&models.FloodModel{})
 	r := routes.SetupRouter()
-	//running
+
 	r.Run()
 }
