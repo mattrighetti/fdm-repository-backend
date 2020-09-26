@@ -8,12 +8,13 @@ import (
 
 //SetupRouter ... Configure routes
 func SetupRouter() *gin.Engine {
-	r := gin.Default()
-	group := r.Group("/api")
+	router := gin.Default()
+	group := router.Group("/api")
 	{
 		group.GET("models", controllers.GetUsers)
 		group.GET("models/:id", controllers.GetUserByID)
 		group.GET("missingModels", controllers.GetMissingModels)
 	}
-	return r
+
+	return router
 }
