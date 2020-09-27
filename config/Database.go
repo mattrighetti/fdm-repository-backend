@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jinzhu/gorm"
 )
@@ -20,11 +21,35 @@ type DBConfig struct {
 
 // BuildDBConfig returns a pointer to a DBConfig struct
 func BuildDBConfig() *DBConfig {
+	hostname, exist := os.LookupEnv("DB_HOST")
+
+	if !exist {
+		hostname = "localhost"
+	}
+
+	username, exist := os.LookupEnv("DB_USER")
+
+	if !exist {
+		username = "root"
+	}
+
+	password, exist := os.LookupEnv("DB_PASSWD")
+
+	if !exist {
+		password = "passwd"
+	}
+
+	fmt.Printf("Init DB config with variables\nHOST: %s\nUSER: %s\nPassword: %s\n",
+		hostname,
+		username,
+		password,
+	)
+
 	dbConfig := DBConfig{
-		Host:     "192.168.1.195",
+		Host:     hostname,
 		Port:     3306,
-		User:     "root",
-		Password: "my-secret-pw",
+		User:     username,
+		Password: password,
 		DBName:   "fdm-repository",
 	}
 
