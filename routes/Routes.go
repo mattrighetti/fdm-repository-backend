@@ -13,7 +13,7 @@ func SetupRouter() *gin.Engine {
 	{
 		group.GET("models", controllers.GetUsers)
 		group.GET("models/:id", controllers.GetUserByID)
-		group.GET("missingModels", controllers.GetMissingModels)
+		group.GET("missing-models", controllers.GetMissingModels)
 	}
 
 	return router

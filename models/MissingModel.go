@@ -4,7 +4,7 @@ package models
 type MissingModel struct {
 	ID     uint   `json:"id"`
 	Name   string `json:"name"`
-	Biblio string `json:"biblio"`
+	Bibliography string `json:"bibliography"`
 }
 
 // TableName returns the name of the table where MissingModels are stored
