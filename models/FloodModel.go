@@ -7,7 +7,7 @@ type FloodModel struct {
 	Version      string `json:"version"`
 	Soa          string `json:"soa"`
 	Cod          string `json:"cod"`
-	Floodtypei   string `json:"Floodtypei"`
+	Floodtypei   string `json:"floodtypei"`
 	Floodtypeii  string `json:"floodtypeii"`
 	Modeltypei   string `json:"modeltypei"`
 	Modeltypeii  string `json:"modeltypeii"`
