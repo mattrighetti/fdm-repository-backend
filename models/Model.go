@@ -7,10 +7,18 @@ import (
 )
 
 //GetAllUsers Fetch all user data
-func GetAllUsers(model *[]FloodModel) (err error) {
+func GetAllModels(model *[]FloodModel) (err error) {
 	if err = config.DB.Find(model).Error; err != nil {
 		return err
 	}
+	return nil
+}
+
+func GetAllModelsNoMarkdown(model *[]FloodModel) (err error) {
+	if err = config.DB.Select("id, name, acronym, version, cod, soa, floodtypei, floodtypeii").Find(model).Error; err != nil {
+		return err
+	}
+
 	return nil
 }
 

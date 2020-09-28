@@ -9,9 +9,9 @@ import (
 )
 
 //GetUsers gets all users from database
-func GetUsers(c *gin.Context) {
+func GetModels(c *gin.Context) {
 	var floodModel []models.FloodModel
-	err := models.GetAllUsers(&floodModel)
+	err := models.GetAllModelsNoMarkdown(&floodModel)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
