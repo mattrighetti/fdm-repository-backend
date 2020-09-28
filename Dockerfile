@@ -1,5 +1,7 @@
 FROM golang:1.15.2
 
+LABEL org.opencontainers.image.source https://github.com/MattRighetti/fdm-repository-backend
+
 WORKDIR $GOPATH/src/fdm-repository-backend
 
 COPY . .
