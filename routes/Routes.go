@@ -15,6 +15,7 @@ func SetupRouter() *gin.Engine {
 		group.GET("models", controllers.GetModels)
 		group.GET("models/:id", controllers.GetUserByID)
 		group.GET("missing-models", controllers.GetMissingModels)
+		group.GET("filters", controllers.GetFilters)
 	}
 
 	return router
