@@ -29,6 +29,9 @@ func GetFilters(filters *[]string, name string) (err error) {
 			return nil
 		}
 
+		if tmp == "" {
+			continue
+		}
 
 		if strings.Contains(tmp, "/") && name != "cod" {
 			stringSlice := strings.Split(tmp, "/")
