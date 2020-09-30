@@ -54,7 +54,6 @@ func BuildDBConfig() *DBConfig {
 }
 
 // DbURL returns Database URL readable for GORM
-// e.g. root:my-secret-pw@tcp(192.168.1.195:3306)/fdm-repository?charset=utf8&parseTime=True&loc=Local
 func DbURL(dbConfig *DBConfig) string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
 		dbConfig.User,
