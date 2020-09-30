@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"database/sql"
+	"fmt"
 
 	"github.com/MattRighetti/fdm-repository-backend/config"
 	"github.com/MattRighetti/fdm-repository-backend/models"
@@ -25,5 +25,5 @@ func main() {
 	config.DB.AutoMigrate(&models.FloodModel{})
 	r := routes.SetupRouter()
 
-	r.Run()
+	_ = r.Run()
 }

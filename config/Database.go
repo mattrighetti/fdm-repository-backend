@@ -22,21 +22,18 @@ type DBConfig struct {
 // BuildDBConfig returns a pointer to a DBConfig struct
 func BuildDBConfig() *DBConfig {
 	hostname, exist := os.LookupEnv("DB_HOST")
-
 	if !exist {
-		hostname = "localhost"
+		panic("DB_HOST not in env...Exiting.")
 	}
 
 	username, exist := os.LookupEnv("DB_USER")
-
 	if !exist {
-		username = "root"
+		panic("DB_USER not in env.")
 	}
 
 	password, exist := os.LookupEnv("DB_PASSWD")
-
 	if !exist {
-		password = "passwd"
+		panic("DB_PASSWD not in env.")
 	}
 
 	fmt.Printf("Init DB config with variables\nHOST: %s\nUSER: %s\nPassword: %s\n",
