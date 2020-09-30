@@ -8,15 +8,37 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//GetUsers gets all users from database
-func GetUsers(c *gin.Context) {
-	var floodModel []models.FloodModel
-	err := models.GetAllUsers(&floodModel)
+//GetModels gets all users from database
+func GetModels(c *gin.Context) {
+	var floodModel []models.FloodModelNoDescription
+	err := models.GetAllModelsNoMarkdown(&floodModel)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, floodModel)
+	}
+}
+
+//GetFilters get all filters from database
+func GetFilters(c *gin.Context) {
+	filtersMap := map[string]*[]string{
+		"cod": {},
+		"soa": {},
+		"floodtypei": {},
+		"floodtypeii": {},
+		"modeltypei": {},
+		"modeltypeii": {},
+		"modeltypeiii": {},
+		"eis": {},
+	}
+
+	err := models.GetFiltersMap(filtersMap)
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, filtersMap)
 	}
 }
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"database/sql"
 
 	"github.com/MattRighetti/fdm-repository-backend/config"
 	"github.com/MattRighetti/fdm-repository-backend/models"
@@ -14,6 +15,7 @@ var err error
 
 func main() {
 	config.DB, err = gorm.Open("mysql", config.DbURL(config.BuildDBConfig()))
+	config.BareDB, err = sql.Open("mysql", config.DbURL(config.BuildDBConfig()))
 
 	if err != nil {
 		fmt.Println("Status:", err)

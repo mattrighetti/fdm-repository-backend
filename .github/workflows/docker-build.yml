@@ -2,7 +2,8 @@ name: Go Build and Docker build-push
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -15,8 +16,12 @@ jobs:
         with:
           go-version: '^1.15.1'
 
-      - name: Set SHA8
-        run: echo ::set-env name=SHA8::$(git log --oneline -1 | awk '{print $1}')
+      - name: Get tag
+        id: branch_name
+        run: echo ::set-env name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
+      - name: Test tag
+        run: echo $SOURCE_TAG
 
       - name: Go Build
         run: go build
@@ -29,9 +34,7 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Create docker fdm-repository-backend image
-        run: docker build -t ghcr.io/mattrighetti/fdm-repository-backend:latest -t ghcr.io/mattrighetti/fdm-repository-backend:$SHA8 .
+        run: docker build -t ghcr.io/mattrighetti/fdm-repository-backend:$SOURCE_TAG .
 
       - name: Push docker images
-        run: |
-          docker push ghcr.io/mattrighetti/fdm-repository-backend:latest
-          docker push ghcr.io/mattrighetti/fdm-repository-backend:$SHA8
+        run: docker push ghcr.io/mattrighetti/fdm-repository-backend:$SOURCE_TAG
