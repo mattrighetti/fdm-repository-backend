@@ -5,8 +5,8 @@ type FloodModel struct {
 	Name         string `json:"name"`
 	Acronym      string `json:"acronym"`
 	Version      string `json:"version"`
-	Soa          string `json:"soa"`
 	Cod          string `json:"cod"`
+	Soa          string `json:"soa"`
 	Floodtypei   string `json:"floodtypei"`
 	Floodtypeii  string `json:"floodtypeii"`
 	Modeltypei   string `json:"modeltypei"`
@@ -21,8 +21,8 @@ type FloodModelNoDescription struct {
 	Name         string `json:"name"`
 	Acronym      string `json:"acronym"`
 	Version      string `json:"version"`
-	Soa          string `json:"soa"`
 	Cod          string `json:"cod"`
+	Soa          string `json:"soa"`
 	Floodtypei   string `json:"floodtypei"`
 	Floodtypeii  string `json:"floodtypeii"`
 	Modeltypei   string `json:"modeltypei"`
