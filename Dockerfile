@@ -2,7 +2,7 @@
 # STEP 1 build executable  #
 ############################
 FROM golang:1.15.2-alpine3.12 AS build-phase
-LABEL org.opencontainers.image.source https://github.com/MattRighetti/fdm-repository-backend
+LABEL org.opencontainers.image.source https://github.com/mattrighetti/fdm-repository-backend
 WORKDIR $GOPATH/src/fdm-repository-backend
 COPY . .
 RUN go get -d -v ./...

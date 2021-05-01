@@ -2,8 +2,8 @@ package models
 
 // MissingModel is a struct that represents MissingModel
 type MissingModel struct {
-	ID     uint   `json:"id"`
-	Name   string `json:"name"`
+	ID           uint   `json:"id"`
+	Name         string `json:"name"`
 	Bibliography string `json:"bibliography"`
 }
 

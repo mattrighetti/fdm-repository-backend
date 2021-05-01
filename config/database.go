@@ -1,14 +1,13 @@
 package config
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"os"
-
-	"github.com/jinzhu/gorm"
 )
 
-// DB gorm Database object
-var DB *gorm.DB
+var Db *sql.DB
 
 // DBConfig is a struct that contains necessary data to connect to a MYSql server instance
 type DBConfig struct {
@@ -19,22 +18,11 @@ type DBConfig struct {
 	Password string
 }
 
-// BuildDBConfig returns a pointer to a DBConfig struct
-func BuildDBConfig() *DBConfig {
-	hostname, exist := os.LookupEnv("DB_HOST")
-	if !exist {
-		panic("DB_HOST not in env...Exiting.")
-	}
-
-	username, exist := os.LookupEnv("DB_USER")
-	if !exist {
-		panic("DB_USER not in env.")
-	}
-
-	password, exist := os.LookupEnv("DB_PASSWD")
-	if !exist {
-		panic("DB_PASSWD not in env.")
-	}
+// buildDBConfig returns a pointer to a DBConfig struct
+func buildDBConfig() *DBConfig {
+	hostname := getEnv("DB_HOST")
+	username := getEnv("DB_USER")
+	password := getEnv("DB_PASSWD")
 
 	fmt.Printf("Init DB config with variables\nHOST: %s\nUSER: %s\nPassword: %s\n",
 		hostname,
@@ -53,8 +41,17 @@ func BuildDBConfig() *DBConfig {
 	return &dbConfig
 }
 
+func getEnv(envName string) string {
+	value, exists := os.LookupEnv(envName)
+	if !exists {
+		log.Fatalf("%s not in env.", envName)
+	}
+	return value
+}
+
 // DbURL returns Database URL readable for GORM
-func DbURL(dbConfig *DBConfig) string {
+func DbURL() string {
+	dbConfig := buildDBConfig()
 	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
 		dbConfig.User,
 		dbConfig.Password,

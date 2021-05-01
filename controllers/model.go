@@ -1,17 +1,18 @@
 package controllers
 
 import (
+	"github.com/mattrighetti/fdm-repository-backend/database"
 	"net/http"
 
-	"github.com/MattRighetti/fdm-repository-backend/models"
+	"github.com/mattrighetti/fdm-repository-backend/models"
 
 	"github.com/gin-gonic/gin"
 )
 
 //GetModels gets all users from database
 func GetModels(c *gin.Context) {
-	var floodModel []models.FloodModelNoDescription
-	err := models.GetAllModelsNoMarkdown(&floodModel)
+	var floodModel []models.FloodModel
+	err := database.GetAllModels(&floodModel)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -33,7 +34,7 @@ func GetFilters(c *gin.Context) {
 		"eis": {},
 	}
 
-	err := models.GetFiltersMap(filtersMap)
+	err := database.GetFiltersMap(filtersMap)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -42,11 +43,11 @@ func GetFilters(c *gin.Context) {
 	}
 }
 
-//GetUserByID ... Get the user by id
-func GetUserByID(c *gin.Context) {
+//GetModelByID Get user by id
+func GetModelByID(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var model models.FloodModel
-	err := models.GetUserByID(&model, id)
+	err := database.GetModelByID(&model, id)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -58,7 +59,7 @@ func GetUserByID(c *gin.Context) {
 // GetMissingModels gets all missing models from database
 func GetMissingModels(c *gin.Context) {
 	var missingModels []models.MissingModel
-	err := models.GetMissingModels(&missingModels)
+	err := database.GetMissingModels(&missingModels)
 
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)

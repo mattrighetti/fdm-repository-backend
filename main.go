@@ -2,28 +2,17 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
-
-	"github.com/MattRighetti/fdm-repository-backend/config"
-	"github.com/MattRighetti/fdm-repository-backend/models"
-	"github.com/MattRighetti/fdm-repository-backend/routes"
-
-	"github.com/jinzhu/gorm"
+	"github.com/mattrighetti/fdm-repository-backend/config"
+	"github.com/mattrighetti/fdm-repository-backend/routes"
+	"log"
 )
 
-var err error
-
 func main() {
-	config.DB, err = gorm.Open("mysql", config.DbURL(config.BuildDBConfig()))
-	config.BareDB, err = sql.Open("mysql", config.DbURL(config.BuildDBConfig()))
-
+	var err error
+	config.Db, err = sql.Open("mysql", config.DbURL())
 	if err != nil {
-		fmt.Println("Status:", err)
+		log.Fatalf("coud not connect to database: %v", err)
 	}
-
-	defer config.DB.Close()
-	config.DB.AutoMigrate(&models.FloodModel{})
 	r := routes.SetupRouter()
-
 	_ = r.Run()
 }
