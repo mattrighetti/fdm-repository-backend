@@ -18,7 +18,7 @@ jobs:
 
       - name: Get tag
         id: branch_name
-        run: echo ::set-env name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+        run: echo "SOURCE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Test tag
         run: echo $SOURCE_TAG
