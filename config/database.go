@@ -9,8 +9,8 @@ import (
 
 var Db *sql.DB
 
-// DBConfig is a struct that contains necessary data to connect to a MYSql server instance
-type DBConfig struct {
+// dbConfig is a struct that contains necessary data to connect to a MYSql server instance
+type dbConfig struct {
 	Host     string
 	Port     int
 	User     string
@@ -18,11 +18,12 @@ type DBConfig struct {
 	Password string
 }
 
-// buildDBConfig returns a pointer to a DBConfig struct
-func buildDBConfig() *DBConfig {
+// buildDBConfig returns a pointer to a dbConfig struct
+func buildDBConfig() *dbConfig {
 	hostname := getEnv("DB_HOST")
 	username := getEnv("DB_USER")
 	password := getEnv("DB_PASSWD")
+	dbSchema := getEnv("DB_SCHEMA")
 
 	fmt.Printf("Init DB config with variables\nHOST: %s\nUSER: %s\nPassword: %s\n",
 		hostname,
@@ -30,12 +31,12 @@ func buildDBConfig() *DBConfig {
 		password,
 	)
 
-	dbConfig := DBConfig{
+	dbConfig := dbConfig{
 		Host:     hostname,
 		Port:     3306,
 		User:     username,
 		Password: password,
-		DBName:   "fdm-repository",
+		DBName:   dbSchema,
 	}
 
 	return &dbConfig
