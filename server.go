@@ -14,6 +14,7 @@ func newServer() *http.Server {
 	mux := httprouter.New()
 	mux.GET("/models", getModels)
 	mux.GET("/models/:id", getModelByID)
+	mux.GET("/count/models", getNumModels)
 	mux.GET("/filers", getFilters)
 	mux.GET("/missing-models", getMissingModels)
 

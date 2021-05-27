@@ -39,6 +39,19 @@ func GetAllModels(m *[]models.FloodModel) error {
 		})
 }
 
+func CountModels(c *int64) error {
+	return queryWithContext("SELECT COUNT(*) AS count_models FROM models", func(rows *sql.Rows) error {
+		defer rows.Close()
+		for rows.Next() {
+			err := rows.Scan(c)
+			if err != nil {
+				return fmt.Errorf("could not scan row: %v", err)
+			}
+		}
+		return nil
+	})
+}
+
 func GetFilters(filters *[]string, name string) error {
 	return queryWithContext(
 		"SELECT DISTINCT ? FROM models",

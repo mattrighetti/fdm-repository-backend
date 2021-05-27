@@ -9,7 +9,7 @@ import (
 	"github.com/mattrighetti/fdm-repository-backend/models"
 )
 
-//GetModels gets all users from database
+// getModels gets all users from database
 func getModels(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	var floodModel []models.FloodModel
 	err := database.GetAllModels(&floodModel)
@@ -20,7 +20,18 @@ func getModels(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	}
 }
 
-//GetFilters get all filters from database
+// getNumModels gets the total number of models in the database
+func getNumModels(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
+	var numModels int64
+	err := database.CountModels(&numModels)
+	if err != nil {
+		sendStatus(w, http.StatusInternalServerError)
+	} else {
+		sendJSON(w, http.StatusOK, numModels)
+	}
+}
+
+// getFilters gets all filters from database
 func getFilters(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	filtersMap := map[string]*[]string{
 		"cod":          {},
@@ -41,7 +52,7 @@ func getFilters(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	}
 }
 
-//GetModelByID Get user by id
+// getModelByID gets user by id
 func getModelByID(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	id := p.ByName("id")
 	var model models.FloodModel
@@ -53,7 +64,7 @@ func getModelByID(w http.ResponseWriter, req *http.Request, p httprouter.Params)
 	}
 }
 
-// GetMissingModels gets all missing models from database
+// getMissingModels gets all missing models from database
 func getMissingModels(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
 	var missingModels []models.MissingModel
 	err := database.GetMissingModels(&missingModels)
